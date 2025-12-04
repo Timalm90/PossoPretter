@@ -21,31 +21,26 @@ body {
   height: 500px;
 }
 
-/* FIXED LEFT MASK */
-.img-container {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 400px;
-  height: 500px;
-  border-radius: 20px;
-  overflow: hidden;
+/* MASK A (left) */
+.mask-left {
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
-/* FIXED RIGHT MASK */
+/* MASK B (right) */
+.mask-right {
+  clip-path: polygon(100% 0, 50% 0, 50% 100%, 100% 100%);
+}
+
+.img-container,
 .img-container-reversed {
   position: absolute;
   top: 0;
   left: 0;
   width: 400px;
   height: 500px;
-  border-radius: 20px;
   overflow: hidden;
-  clip-path: polygon(100% 0, 50% 0, 50% 100%, 100% 100%);
 }
 
-/* IMAGES MOVE UNDER MASKS */
 img {
   position: absolute;
   top: 0;
@@ -55,18 +50,18 @@ img {
   object-fit: contain;
 }
 
-/* Base image on left */
-.img-base {
-  z-index: 1;
-}
-
-/* Mirrored image on right */
 .img-mirror {
-  z-index: 2;
   transform: scaleX(-1);
 }
 
 /* Slider */
 input[type="range"] {
   width: 400px;
+}
+
+/* Button styling (optional) */
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
 }

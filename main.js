@@ -1,13 +1,24 @@
-const slider = document.getElementById("slider");
-const base = document.querySelector(".img-base");
-const mirror = document.querySelector(".img-mirror");
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: '222b074ef12e930e8324992aa11d38da'
+  }
+};
 
-slider.addEventListener("input", () => {
-  const pct = (slider.value - 50) / 50;   // -1 to +1
-  const maxOffset = 200;                  // px movement range
-  const offset = pct * maxOffset;
+fetch('https://api.themoviedb.org/3/movie/popular?language=en-US&page=1', options)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(err => console.error(err));
 
-  // Move images under masks
-  base.style.transform = `translateX(${offset}px)`;
-  mirror.style.transform = `scaleX(-1) translateX(${-offset}px)`;
-});
+
+ 
+  
+/*
+  🎬 Image URLs
+
+TMDB image paths must be combined with the base URL:
+
+const imgUrl = "https://image.tmdb.org/t/p/w500" + movie.poster_path;
+*/
+
