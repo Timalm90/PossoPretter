@@ -1,0 +1,72 @@
+body {
+  background: #bdf;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pair {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+
+/* FIXED LEFT MASK */
+.img-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+}
+
+/* FIXED RIGHT MASK */
+.img-container-reversed {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  clip-path: polygon(100% 0, 50% 0, 50% 100%, 100% 100%);
+}
+
+/* IMAGES MOVE UNDER MASKS */
+img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Base image on left */
+.img-base {
+  z-index: 1;
+}
+
+/* Mirrored image on right */
+.img-mirror {
+  z-index: 2;
+  transform: scaleX(-1);
+}
+
+/* Slider */
+input[type="range"] {
+  width: 400px;
+}
