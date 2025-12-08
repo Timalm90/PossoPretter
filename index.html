@@ -8,27 +8,50 @@
 </head>
 <body>
 
+<div class="options">
+
+    <select id="mode">
+        <option value="random">Random</option>
+        <option value="popular">Popular</option>
+        <option value="top_rated">Top Rated</option>
+        <option value="now_playing">Now Playing</option>
+    </select>
+
+          <button id="randomBtn">Refresh</button>          
+
+</div>
+
+
+<div class="search"></div>
+ 
+  <input id="search" type="text" placeholder="Search movie...">
+  <button id="searchBtn">Search</button>
+  <ul id="suggestions"></ul>
+
+</div>
+
+
+</div>
+
   <div class="wrapper">
 
     <div class="pair">
-
       <div class="img-container mask-left">
-        <img class="img-base" src="/img/IMG_4236-495571_53503e9c-705c-4eb3-852b-360a19e991ba-770332_1080x.webp" alt="image">
+        <img class="img-base" src="/img/mlxwpHO6qjK6v5dSUVW75zMEVzI.webp" alt="image">
       </div>
-
       <div class="img-container-reversed mask-right">
-        <img class="img-mirror" src="/img/IMG_4236-495571_53503e9c-705c-4eb3-852b-360a19e991ba-770332_1080x.webp"  alt="image">
+        <img class="img-mirror" src="/img/mlxwpHO6qjK6v5dSUVW75zMEVzI.webp"  alt="image">
       </div>
 
     </div>
 
     <input id="slider" type="range" min="0" max="100" value="50" />
-
-    <!-- NEW BUTTON -->
-    <button id="swapBtn">Swap Masks</button>
+    <button id="swapBtn">Reverse</button>
 
   </div>
 
+  <script src="imgrvrs.js"></script>
   <script src="main.js"></script>
+  
 </body>
 </html>

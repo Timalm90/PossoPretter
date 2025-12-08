@@ -2,11 +2,26 @@ body {
   background: #bdf;
   display: flex;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   height: 100vh;
   margin: 0;
   font-family: sans-serif;
 }
+
+
+.options {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.search {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
 
 .wrapper {
   display: flex;
@@ -65,3 +80,5 @@ button {
   font-size: 16px;
   cursor: pointer;
 }
+
+
