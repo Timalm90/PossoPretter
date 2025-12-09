@@ -21,22 +21,22 @@ function setPoster(path){
     img2.src = IMG + path;
 }
 
-
-
 async function getRandomMovie(){
     while(true){
-        const id = randInt(1000000) + 1;
+        const id = randInt(1200000) + 1;
         const res = await fetch(`${BASE}/movie/${id}?api_key=${API_KEY}&language=en-US`);
         const movie = await res.json();
 
         if(movie.status_code) continue; 
         if(movie.adult) continue;      
         if(!movie.poster_path) continue;
+        if (movie.original_language !== "en" && movie.original_language !== "sv") continue;
+        if(movie.vote_average <= 7) continue;
+
 
         return movie;
     }
 }
-
 
 async function getMovieFromList(type){
     const res = await fetch(`${BASE}/movie/${type}?api_key=${API_KEY}&language=en-US`);
@@ -46,7 +46,6 @@ async function getMovieFromList(type){
 
     return list[randInt(list.length)];
 }
-
 
 async function searchMovie(title){
   const url =
@@ -64,7 +63,6 @@ async function searchMovie(title){
     return data.results[0]; 
 }
 
-
 async function loadMovie(){
     const mode = modeSelect.value;
 
@@ -80,7 +78,6 @@ async function loadMovie(){
     console.log("Loaded:", movie.title);
     setPoster(movie.poster_path);
 }
-
 
 randomButton.onclick = loadMovie;
 
