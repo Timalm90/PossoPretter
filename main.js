@@ -1,14 +1,14 @@
 const API_KEY = "222b074ef12e930e8324992aa11d38da";
 const BASE = "https://api.themoviedb.org/3";
-const IMG = "https://image.tmdb.org/t/p/w1280";
+const IMG = "https://image.tmdb.org/t/p/original";
 
 const img1 = document.querySelector(".img-base");
 const img2 = document.querySelector(".img-mirror");
 
-const randomBtn = document.getElementById("randomBtn");
+const randomButton = document.getElementById("randomButton");
 const modeSelect = document.getElementById("mode");
 const searchInput = document.getElementById("search");
-const searchBtn = document.getElementById("searchBtn");
+const searchButton = document.getElementById("searchButton");
 
 
 function randInt(max){
@@ -20,6 +20,7 @@ function setPoster(path){
     img1.src = IMG + path;
     img2.src = IMG + path;
 }
+
 
 
 async function getRandomMovie(){
@@ -81,11 +82,11 @@ async function loadMovie(){
 }
 
 
-randomBtn.onclick = loadMovie;
+randomButton.onclick = loadMovie;
 
 modeSelect.onchange = loadMovie;
 
-searchBtn.onclick = async () => {
+searchButton.onclick = async () => {
     const title = searchInput.value.trim();
     if(!title) return;
 
@@ -108,6 +109,4 @@ searchInput.addEventListener("keydown", async (e) => {
 
 
 loadMovie();
-
-
 

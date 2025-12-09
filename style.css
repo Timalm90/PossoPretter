@@ -1,29 +1,147 @@
 body {
-  background: #bdf;
-  display: flex;
-  justify-content: center;
+background: #833AB4;
+background: linear-gradient(-180deg,rgba(131, 58, 180, 1) 0%, rgba(252, 218, 69, 1) 100%);
+font-family: sans-serif;
+}
+
+.content {
+   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
-  margin: 0;
-  font-family: sans-serif;
+width: 100vw;
+
+}
+
+.titleBold {
+  margin: 50px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+
 }
 
 
+/* .possop {
+ letter-spacing: 1.1vw;
+
+}
+
+.retter {
+ letter-spacing: 3vw;
+
+} */
+
+h2 {
+
+  margin: -15px;
+  padding: 0;
+  font-family: "Boldonse", system-ui;
+  font-weight: 400;
+  font-style: normal;
+      background: -webkit-linear-gradient(#693fa7, #320e72);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+}
+
+
+
+
+
+
+backward {
+    background: -webkit-linear-gradient(#fff954, #ffcd07);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  -moz-transform: scale(-1, 1);
+  -webkit-transform: scale(-1, 1);
+  transform: scale(-1, 1);
+}
 .options {
+  margin-top: 20px;
   width: 100vw;
+  gap: 8rem;
   display: flex;
   justify-content: center;
 }
 
 .search {
+  gap: 2rem;
   width: 100vw;
   display: flex;
+  align-items: center;
   justify-content: center;
+}
+
+.searchBar {
+
+  padding: 10px 20px;
+  border-radius: 50px;
+  width: 200px;
+}
+
+
+.selectBox {
+  padding: 10px 20px;
+  border-radius: 20px;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 12px;
+  transition: all 0.5s ease;
+  position: relative;
+
+
+   appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="16" width="16" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,7 15,7 10,12"/></svg>');
+    background-repeat: no-repeat;
+    background-position: right 15px center; 
+    
+    border: 2px solid #333;
+}
+
+
+
+
+button {
+  padding: 17px 40px;
+  border-radius: 50px;
+  cursor: pointer;
+  border: 0;
+  background-color: white;
+  box-shadow: rgb(0 0 0 / 5%) 0 0 8px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  font-size: 15px;
+  transition: all 0.5s ease;
+}
+
+button:hover {
+  letter-spacing: 3px;
+  background-color: hsl(0, 0%, 42%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(164, 177, 178) 0px 7px 29px 0px;
+}
+
+button:active {
+  letter-spacing: 3px;
+  background-color: hsl(223, 41%, 45%);
+  color: hsl(0, 0%, 100%);
+  box-shadow: rgb(78, 131, 228) 0px 0px 0px 0px;
+  transform: scale(1.05);
+  transition: 100ms;
 }
 
 
 .wrapper {
+  padding-top: 50px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,12 +154,10 @@ body {
   height: 500px;
 }
 
-/* MASK A (left) */
 .mask-left {
   clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
 }
 
-/* MASK B (right) */
 .mask-right {
   clip-path: polygon(100% 0, 50% 0, 50% 100%, 100% 100%);
 }
@@ -54,7 +170,11 @@ body {
   width: 400px;
   height: 500px;
   overflow: hidden;
+  
+
 }
+
+
 
 img {
   position: absolute;
@@ -67,14 +187,13 @@ img {
 
 .img-mirror {
   transform: scaleX(-1);
+  
 }
 
-/* Slider */
 input[type="range"] {
   width: 400px;
 }
 
-/* Button styling (optional) */
 button {
   padding: 10px 20px;
   font-size: 16px;

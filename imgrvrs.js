@@ -2,12 +2,13 @@ const slider = document.getElementById("slider");
 const base = document.querySelector(".img-base");
 const mirror = document.querySelector(".img-mirror");
 
+
 const leftMask = document.querySelector(".img-container");
 const rightMask = document.querySelector(".img-container-reversed");
 
-const swapBtn = document.getElementById("swapBtn");
+const swapButton = document.getElementById("swapButton");
 
-// --- SLIDER MOVEMENT LOGIC ---
+// --- SLIDER MOVEMENT---
 slider.addEventListener("input", () => {
   const pct = (slider.value - 50) / 50;
   const maxOffset = 200;
@@ -17,8 +18,7 @@ slider.addEventListener("input", () => {
   mirror.style.transform = `scaleX(-1) translateX(${offset}px)`;
 });
 
-// --- SWAP MASKS ---
-swapBtn.addEventListener("click", () => {
+swapButton.addEventListener("click", () => {
   leftMask.classList.toggle("mask-left");
   leftMask.classList.toggle("mask-right");
 
@@ -27,4 +27,3 @@ swapBtn.addEventListener("click", () => {
 });
 
 
-//-------------------------------------------------------//

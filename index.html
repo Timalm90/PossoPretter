@@ -5,28 +5,44 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>PossoPretter</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
+
 </head>
 <body>
+<section class="content">
 
+  <div class="titleBold">
+  <h2 class="possop">
+     POS<backward>POS</backward>
+  </h2>
+     <br>
+
+     <h2 class="retter">
+    <backward>TER</backward>TER
+    </h2>
+
+  </div>
 <div class="options">
 
-    <select id="mode">
-        <option value="random">Random</option>
-        <option value="popular">Popular</option>
-        <option value="top_rated">Top Rated</option>
-        <option value="now_playing">Now Playing</option>
+    <select class="selectBox" id="mode">
+      <option value="popular">Popular</option>
+      <option value="random">Random</option>
+      <option value="top_rated">Top Rated</option>
+      <option value="now_playing">Now Playing</option>
     </select>
 
-          <button id="randomBtn">Refresh</button>          
+          <button id="randomButton">Refresh</button>          
 
 </div>
+<br>
 
+<div class="search">
 
-<div class="search"></div>
- 
-  <input id="search" type="text" placeholder="Search movie...">
-  <button id="searchBtn">Search</button>
-  <ul id="suggestions"></ul>
+  <input id="search" type="text" class="searchBar" placeholder="Search movie...">
+  <button id="searchButton">Search</button>
+
 
 </div>
 
@@ -41,17 +57,20 @@
       </div>
       <div class="img-container-reversed mask-right">
         <img class="img-mirror" src="/img/mlxwpHO6qjK6v5dSUVW75zMEVzI.webp"  alt="image">
+
+
       </div>
 
     </div>
 
     <input id="slider" type="range" min="0" max="100" value="50" />
-    <button id="swapBtn">Reverse</button>
+    <button id="swapButton">Reverse</button>
 
   </div>
-
+</section>
   <script src="imgrvrs.js"></script>
   <script src="main.js"></script>
+
   
 </body>
 </html>
