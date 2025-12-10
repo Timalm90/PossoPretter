@@ -1,3 +1,11 @@
+:root {
+  --primary-color: rgb(170 114 185);
+  --primary-color-active: rgb(123, 51, 142);
+  --accent-color: hsl(59, 60%, 73%);
+  --accent-color-active: hsl(57, 97%, 56%);
+}
+
+
 body {
   background: #833ab4;
   background: linear-gradient(
@@ -132,8 +140,8 @@ button {
 
 button:hover {
   letter-spacing: 3px;
-  background-color: hsl(59, 60%, 73%);
-  color: hsl(0, 0%, 19%);
+  background-color: var(--accent-color);
+  color: var(--primary-color-active);
 }
 
 button:active {
@@ -151,14 +159,14 @@ button:active {
 }
 
 #swapButton:hover {
-  background-color: rgb(170 114 185);
-    color: white;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
 
 
 }
 
 #swapButton:active {
-  background-color: rgb(153, 91, 171);
+  background-color: var(--primary-color-active);
   
 }
 
@@ -232,6 +240,8 @@ input[type="range"] {
 .wrapper {
   scale: .8;
   margin-top: -50px;
+  max-width: 95vw;
 }
 
 }
+

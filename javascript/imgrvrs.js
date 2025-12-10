@@ -11,7 +11,7 @@ const swapButton = document.getElementById("swapButton");
 // --- SLIDER MOVEMENT---
 slider.addEventListener("input", () => {
   const pct = (slider.value - 50) / 50;
-  const maxOffset = 200;
+  const maxOffset = 167;
   const offset = pct * maxOffset;
 
   base.style.transform = `translateX(${offset}px)`;
@@ -25,5 +25,3 @@ swapButton.addEventListener("click", () => {
   rightMask.classList.toggle("mask-left");
   rightMask.classList.toggle("mask-right");
 });
-
-
