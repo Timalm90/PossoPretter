@@ -8,8 +8,6 @@ const img2 = document.querySelector(".img-mirror");
 const randomButton = document.getElementById("randomButton");
 const modeSelect = document.getElementById("mode");
 const searchInput = document.getElementById("search");
-// const searchButton = document.getElementById("searchButton");
-
 
 function randInt(max){
     return Math.floor(Math.random() * max);
@@ -82,14 +80,6 @@ async function loadMovie(){
 randomButton.onclick = loadMovie;
 
 modeSelect.onchange = loadMovie;
-
-// searchButton.onclick = async () => {
-//     const title = searchInput.value.trim();
-//     if(!title) return;
-
-//     const movie = await searchMovie(title);
-//     if(movie) setPoster(movie.poster_path);
-// };
 
 searchInput.addEventListener("keydown", async (e) => {
     if (e.key !== "Enter") return;   
