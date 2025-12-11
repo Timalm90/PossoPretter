@@ -31,12 +31,11 @@ async function getRandomMovie(){
         if (movie.original_language !== "en" && movie.original_language !== "sv") continue;
         if(movie.vote_average <= 7) continue;
 
-
         return movie;
     }
 }
-
-async function getMovieFromList(type){
+    
+    async function getMovieFromList(type){
     const res = await fetch(`${BASE}/movie/${type}?api_key=${API_KEY}&language=en-US`);
     const data = await res.json();
 

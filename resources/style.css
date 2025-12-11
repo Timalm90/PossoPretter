@@ -1,9 +1,9 @@
 :root {
-  --primary-color: rgb(170 114 185);
+  --primary-color: #62366F;
   --primary-color-active: rgb(123, 51, 142);
   --accent-color: #e4d57f;
   --accent-color-active: #ffbd53;
-
+  --ui-scale: 1;  
 }
 
 
@@ -15,7 +15,10 @@ body {
     rgba(252, 218, 69, 1) 100%
   );
   background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;   
   display: flex;
+  object-fit: fill;
   justify-content: center;
   align-items: start;
   height: 100%;
@@ -24,13 +27,19 @@ body {
   font-family: sans-serif;
 }
 
+
 .content {
+  transform: scale(var(--ui-scale));
+  transform-origin: top center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 95vw;
-  height: 100vh;
+   min-height: 100vh;
+  padding-top: 4vh;   
+  padding-bottom: 2vh;
+  justify-content: flex-start; 
   margin: 0;
 }
 
@@ -72,6 +81,7 @@ backward {
 .navigation {
   width: 95vw;
   display: flex;
+  scale: clamp(0.1, 1,);
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -80,7 +90,7 @@ backward {
 
 
 .options {
-  width: 100vw;
+  width: max(95%);
   gap: 1rem;
   display: flex;
   justify-content: center;
@@ -167,15 +177,15 @@ button:active {
 
 #swapButton:hover {
   background-color: var(--primary-color);
-  color: var(--accent-color);
+  color: var(--accent-color-active);
 
 
 }
 
 #swapButton:active {
   background-color: var(--primary-color-active);
-  
 }
+
 
 .wrapper {
   padding-top: 10px;
@@ -230,7 +240,9 @@ input[type="range"] {
   width: clamp(300px, 400px, 95vw);
 }
 
-
+#slider {
+  max-width: 95vw;
+}
 
 @media (max-height: 680px){
 .content {
@@ -241,7 +253,7 @@ input[type="range"] {
 }
 
 .titleBold {
-scale: .5;
+
 margin: 3vh;
 }
 
@@ -253,3 +265,30 @@ margin: 3vh;
 
 }
 
+@media (min-width: 1200px) {
+  :root {
+    --ui-scale: 1.2;   /* upscale on big screens */
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --ui-scale: 0.9;   /* slightly shrink small screens */
+  }
+  .selectBox, #randomButton, .search {
+  scale: .7;
+}
+
+.navigation {
+  gap: 0;
+}
+
+.wrapper {
+margin-top: 0;
+}
+
+.content {
+  gap: 0;
+}
+
+}

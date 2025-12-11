@@ -10,13 +10,13 @@ const swapButton = document.getElementById("swapButton");
 
 // --- SLIDER MOVEMENT---
 slider.addEventListener("input", () => {
-  const pct = (slider.value - 50) / 50;
-  const maxOffset = 167;
-  const offset = pct * maxOffset;
+  const pct = (slider.value - 50) / 61;
+  const offset = pct * 50; // percent-based
 
-  base.style.transform = `translateX(${offset}px)`;
-  mirror.style.transform = `scaleX(-1) translateX(${offset}px)`;
+  base.style.transform = `translateX(${offset}%)`;
+  mirror.style.transform = `scaleX(-1) translateX(${offset}%)`;
 });
+
 
 swapButton.addEventListener("click", () => {
   leftMask.classList.toggle("mask-left");
