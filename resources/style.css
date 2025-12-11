@@ -1,8 +1,9 @@
 :root {
   --primary-color: rgb(170 114 185);
   --primary-color-active: rgb(123, 51, 142);
-  --accent-color: hsl(59, 60%, 73%);
-  --accent-color-active: hsl(57, 97%, 56%);
+  --accent-color: #e4d57f;
+  --accent-color-active: #ffbd53;
+
 }
 
 
@@ -14,8 +15,12 @@ body {
     rgba(252, 218, 69, 1) 100%
   );
   background-repeat: no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: start;
   height: 100%;
   width: 100%;
+  margin: 0;
   font-family: sans-serif;
 }
 
@@ -23,8 +28,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   width: 95vw;
-  height: 120vh;
+  height: 100vh;
+  margin: 0;
 }
 
 .titleBold {
@@ -40,20 +47,20 @@ body {
 }
 
 h1 {
-  filter: opacity(.7);;
+  /* filter: opacity(.7);; */
   margin: -15px;
   padding: 0;
   font-size: clamp(.5rem, 1.5rem, 3rem);
   font-family: "Boldonse", system-ui;
   font-weight: 800;
   font-style: normal;
-  background: -webkit-linear-gradient(#693fa7, #320e72);
+  background: -webkit-linear-gradient(var(--primary-color-active), #412b93);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 backward {
-  background: -webkit-linear-gradient(#fff954, #ffcd07);
+  background: -webkit-linear-gradient(var(--accent-color), var(--accent-color-active));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -95,7 +102,7 @@ color: white;
   width: 200px;
   background-color: rgb(170 114 185);
   border-style: none;
-  box-shadow: inset -3px 4px 3px 0px rgba(0, 0, 0, 0.385)
+  box-shadow: inset -4px 4px 2px 0px rgb(67 21 103 / 55%);
 
 }
 
@@ -146,7 +153,7 @@ button:hover {
 
 button:active {
   letter-spacing: 3px;
-  background-color: hsl(57, 97%, 56%);
+  background-color: var(--accent-color-active);
   color: hsl(296, 72%, 18%);
   transform: scale(1.05);
   transition: 100ms;
@@ -230,11 +237,12 @@ input[type="range"] {
   scale: 1;
   height: 100vh;
   margin: 0;
+  margin-top: 4vh;
 }
 
 .titleBold {
-  scale: .7;
-
+scale: .5;
+margin: 3vh;
 }
 
 .wrapper {
