@@ -56,6 +56,15 @@ body {
   padding: clamp(0.5rem, 2vh, 1rem) 0;
 }
 
+#logo {
+  width: clamp(100px, 40vw, 200px);
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  position: relative;
+  z-index: 10;
+}
+
 h1 {
   /* filter: opacity(.7);; */
   margin: -15px;
@@ -438,6 +447,10 @@ input[type="range"] {
 
 /* Large screens (1200px+) */
 @media (min-width: 1200px) {
+  #logo {
+    width: clamp(80px, 25vw, 150px);
+  }
+
   .pair {
     width: clamp(350px, 50vw, 450px);
   }
