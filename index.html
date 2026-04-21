@@ -61,12 +61,22 @@
     <input id="slider" type="range" min="0" max="100" value="50" />
     
     <div class="controls">
-      <button id="swapButton">Reverse</button>
-      <div class="poster-selector">
-        <select id="posterSelect" class="posterDropdown">
-        </select>
+      <div class="reverse-wrapper">
+        <button id="swapButton" class="reverse-button">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 4v6h6M23 20v-6h-6"></path>
+            <path d="M20.49 9A9 9 0 0 0 5.64 5.64M3.51 15A9 9 0 0 0 18.36 18.36"></path>
+          </svg>
+        </button>
       </div>
-      <button id="saveButton">Save Image</button>
+
+      <div class="controls-top">
+        <div class="poster-selector">
+          <select id="posterSelect" class="posterDropdown">
+          </select>
+        </div>
+        <button id="saveButton">Save Image</button>
+      </div>
     </div>
 </section>
   <script src="config.js"></script>
