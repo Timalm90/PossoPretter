@@ -109,6 +109,7 @@ async function loadMovieFromSuggestion(movie) {
   if (movie.poster_path) {
     currentMovieId = movie.id;
     setPoster(movie.poster_path);
+    searchInput.value = "";
     await loadPosterOptions(movie.id);
   } else {
     alert("This movie doesn't have a poster available!");
@@ -168,6 +169,7 @@ async function loadMovie(){
     console.log("Loaded:", movie.title);
     currentMovieId = movie.id;
     setPoster(movie.poster_path);
+    searchInput.value = "";
     await loadPosterOptions(movie.id);
 }
 
