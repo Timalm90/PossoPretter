@@ -10,12 +10,21 @@ const modeSelect = document.getElementById("mode");
 const searchInput = document.getElementById("search");
 const suggestionsDropdown = document.getElementById("suggestions");
 const posterSelect = document.getElementById("posterSelect");
+const loadingText = document.getElementById("loadingText");
 
 let suggestionTimeout;
 let currentMovieId = null;
 
 function randInt(max){
     return Math.floor(Math.random() * max);
+}
+
+function showLoading(message = "Loading movie...") {
+    loadingText.textContent = message;
+}
+
+function hideLoading() {
+    loadingText.textContent = "";
 }
 
 function setPoster(path){
@@ -25,6 +34,38 @@ function setPoster(path){
 }
 
 async function getRandomMovie(){
+    try {
+        // Get a random page from discover results to avoid always getting the same movies
+        const randomPage = randInt(500) + 1;
+        
+        const url = `${BASE}/discover/movie?api_key=${API_KEY}&language=en-US&sort_by=popularity.desc&vote_average.gte=7&with_original_language=en|sv&page=${randomPage}`;
+        const res = await fetch(url);
+        const data = await res.json();
+
+        if (!data.results || data.results.length === 0) {
+            // Fallback: retry with different page
+            return getRandomMovie();
+        }
+
+        // Filter out movies without posters
+        const validMovies = data.results.filter(movie => movie.poster_path && !movie.adult);
+        
+        if (validMovies.length === 0) {
+            // Fallback: retry
+            return getRandomMovie();
+        }
+
+        // Pick a random movie from the valid results
+        return validMovies[randInt(validMovies.length)];
+    } catch (error) {
+        console.error("Error fetching random movie:", error);
+        // Fallback to the old method if discover fails
+        return getRandomMovieFallback();
+    }
+}
+
+async function getRandomMovieFallback(){
+    // Fallback method if discover API fails
     while(true){
         const id = randInt(1200000) + 1;
         const res = await fetch(`${BASE}/movie/${id}?api_key=${API_KEY}&language=en-US`);
@@ -107,10 +148,12 @@ async function getSuggestions(query) {
 
 async function loadMovieFromSuggestion(movie) {
   if (movie.poster_path) {
+    showLoading("Loading movie...");
     currentMovieId = movie.id;
     setPoster(movie.poster_path);
     searchInput.value = "";
     await loadPosterOptions(movie.id);
+    hideLoading();
   } else {
     alert("This movie doesn't have a poster available!");
   }
@@ -156,6 +199,8 @@ async function loadPosterOptions(movieId) {
 
 async function loadMovie(){
     const mode = modeSelect.value;
+    
+    showLoading("Loading movie...");
 
     let movie = null;
 
@@ -171,6 +216,7 @@ async function loadMovie(){
     setPoster(movie.poster_path);
     searchInput.value = "";
     await loadPosterOptions(movie.id);
+    hideLoading();
 }
 
 randomButton.onclick = loadMovie;
@@ -183,7 +229,7 @@ searchInput.addEventListener("input", (e) => {
     
     suggestionTimeout = setTimeout(() => {
         getSuggestions(query);
-    }, 300);
+    }, 200);
 });
 
 searchInput.addEventListener("keydown", async (e) => {
@@ -192,13 +238,17 @@ searchInput.addEventListener("keydown", async (e) => {
     const title = searchInput.value.trim();
     if (!title) return;
 
+    showLoading("Searching...");
     const movie = await searchMovie(title);
     suggestionsDropdown.innerHTML = "";
     
 
     if (movie) {
         setPoster(movie.poster_path);
+        currentMovieId = movie.id;
+        await loadPosterOptions(movie.id);
     }
+    hideLoading();
 });
 
 document.addEventListener("click", (e) => {

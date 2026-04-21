@@ -308,6 +308,13 @@ button:active {
   background-color: var(--primary-color-active);
 }
 
+.loading-text {
+  height: 20px;
+  color: white;
+  font-size: 14px;
+  text-align: center;
+  min-height: 20px;
+}
 
 .wrapper {
   padding-top: 10px;
