@@ -1,6 +1,6 @@
 const API_KEY = CONFIG.TMDB_API_KEY;
 const BASE = "https://api.themoviedb.org/3";
-const IMG = "https://image.tmdb.org/t/p/original";
+const IMG = "https://image.tmdb.org/t/p/w780";
 
 const img1 = document.querySelector(".img-base");
 const img2 = document.querySelector(".img-mirror");
@@ -12,9 +12,44 @@ const suggestionsDropdown = document.getElementById("suggestions");
 const posterSelect = document.getElementById("posterSelect");
 const loadingText = document.getElementById("loadingText");
 const movieTitle = document.getElementById("movieTitle");
+const saveButton = document.getElementById("saveButton");
 
 let suggestionTimeout;
 let currentMovieId = null;
+
+async function fetchImageAsBlob(src) {
+  const proxied = `http://localhost:5501/${encodeURIComponent(src)}`;
+  const res = await fetch(proxied);
+  const blob = await res.blob();
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = reject;
+    img.src = URL.createObjectURL(blob);
+  });
+}
+
+function getContainRect(containerW, containerH, imgW, imgH) {
+  const containerAspect = containerW / containerH;
+  const imageAspect = imgW / imgH;
+  
+  let rectW, rectH;
+  if (containerAspect > imageAspect) {
+    // Image height fills container
+    rectH = containerH;
+    rectW = rectH * imageAspect;
+  } else {
+    // Image width fills container
+    rectW = containerW;
+    rectH = rectW / imageAspect;
+  }
+  
+  // Center in container
+  const x = (containerW - rectW) / 2;
+  const y = (containerH - rectH) / 2;
+  
+  return { x, y, w: rectW, h: rectH };
+}
 
 function randInt(max){
     return Math.floor(Math.random() * max);
@@ -266,6 +301,127 @@ posterSelect.addEventListener("change", (e) => {
         setPoster(posterPath);
     }
 });
+
+// Helper: compute the rendered rect of an object-fit:contain image
+// inside its container. Returns { x, y, w, h } in container-local pixels.
+function getContainRect(containerW, containerH, imgNatW, imgNatH) {
+  const containerRatio = containerW / containerH;
+  const imgRatio = imgNatW / imgNatH;
+  let w, h;
+  if (imgRatio > containerRatio) {
+    // Image is wider than container ratio → letterboxed (bars top/bottom)
+    w = containerW;
+    h = containerW / imgRatio;
+  } else {
+    // Image is taller → pillarboxed (bars left/right)
+    h = containerH;
+    w = containerH * imgRatio;
+  }
+  return {
+    x: (containerW - w) / 2,
+    y: (containerH - h) / 2,
+    w,
+    h,
+  };
+}
+
+async function saveImage() {
+  try {
+    showLoading("Saving image...");
+
+    const baseImg    = document.querySelector(".img-base");
+    const slider     = document.getElementById("slider");
+    const leftContainer = document.querySelector(".img-container");
+
+    // --- Fetch images via blob to avoid CORS taint ---
+    const [tempBase, tempMirror] = await Promise.all([
+      fetchImageAsBlob(baseImg.src),
+      fetchImageAsBlob(baseImg.src), // same source for both sides
+    ]);
+
+    const imgNatW = tempBase.naturalWidth;
+    const imgNatH = tempBase.naturalHeight;
+
+    // --- Screen-space geometry ---
+    const container  = document.querySelector(".pair");
+    const { width: contW, height: contH } = container.getBoundingClientRect();
+
+    // The actual rendered image rect inside the container (object-fit:contain)
+    const rendered = getContainRect(contW, contH, imgNatW, imgNatH);
+
+    // Translate offset: fraction of the *rendered image width*, not the container
+    const pct       = (slider.value - 50) / 61;
+    const offsetPct = pct * 50; // percentage of the image element box (as CSS applies it)
+    const offsetPx  = (offsetPct / 100) * rendered.w; // map to rendered image pixels
+
+    // Clip boundary is at 50% of the container in screen space
+    const clipScreenX = contW / 2;
+
+    // Express clip boundary relative to the rendered image's left edge,
+    // then scale to native image pixels
+    const scale = imgNatW / rendered.w;
+    const clipImgX  = (clipScreenX - rendered.x) * scale;
+    const offsetImg = offsetPx * scale;
+
+    // --- Canvas at full native resolution ---
+    const canvas = document.createElement("canvas");
+    canvas.width  = imgNatW;
+    canvas.height = imgNatH;
+    const ctx = canvas.getContext("2d");
+
+    const leftIsLeft = leftContainer.classList.contains("mask-left");
+
+    function drawSide(side, source, mirrored, translateX) {
+      const destX = side === "left" ? 0       : clipImgX;
+      const destW = side === "left" ? clipImgX : imgNatW - clipImgX;
+
+      ctx.save();
+      ctx.beginPath();
+      ctx.rect(destX, 0, destW, imgNatH);
+      ctx.clip();
+
+      if (mirrored) {
+        // CSS: scaleX(-1) translateX(+offset%)
+        // Applied right-to-left: first translate, then flip around x=0
+        ctx.translate(imgNatW, 0);
+        ctx.scale(-1, 1);
+        ctx.translate(translateX, 0);
+      } else {
+        ctx.translate(translateX, 0);
+      }
+
+      ctx.drawImage(source, 0, 0, imgNatW, imgNatH);
+      ctx.restore();
+    }
+
+    if (leftIsLeft) {
+      drawSide("left",  tempBase,   false, offsetImg);
+      drawSide("right", tempMirror, true,  offsetImg);
+    } else {
+      drawSide("left",  tempMirror, true,  offsetImg);
+      drawSide("right", tempBase,   false, offsetImg);
+    }
+
+    canvas.toBlob((blob) => {
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = `PossoPretter-${currentMovieId || "image"}.png`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
+      showLoading("Image saved!");
+      setTimeout(hideLoading, 2000);
+    }, "image/png");
+
+  } catch (err) {
+    console.error("Error saving image:", err);
+    hideLoading();
+    alert("Error saving image. Please try again.");
+  }
+}
+
+saveButton.addEventListener("click", saveImage);
 
 loadMovie();
 

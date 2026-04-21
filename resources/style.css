@@ -95,7 +95,7 @@ backward {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: clamp(0.5rem, 1.5vh, 1.5rem);
+  gap: clamp(0.25rem, 0.75vh, 0.75rem);
   flex-wrap: wrap;
 }
 
@@ -325,14 +325,14 @@ button:active {
 
 
 
-#swapButton:hover {
+#swapButton:hover, #saveButton:hover {
   background-color: var(--primary-color);
   color: var(--accent-color-active);
 
 
 }
 
-#swapButton:active {
+#swapButton:active, #saveButton:active {
   background-color: var(--primary-color-active);
 }
 
@@ -349,7 +349,7 @@ button:active {
   font-size: clamp(10px, 3vw, 14px);
   font-family: "Boldonse";
   text-align: center;
-  margin-bottom: clamp(0.rem, 1.5vh, 1rem);
+  margin-bottom: clamp(0.1rem, 1.5vh, 1rem);
   font-weight: 500;
   max-width: 90vw;
   word-wrap: break-word;
@@ -361,8 +361,6 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(0.5rem, 1.5vh, 1.2rem);
-  padding: clamp(0.25rem, 0.5vh, 0.5rem) 0 clamp(1rem, 2vh, 2rem) 0;
   width: 100%;
   max-width: 95vw;
   /* flex: 1; */
@@ -455,8 +453,5 @@ input[type="range"] {
     width: clamp(350px, 50vw, 450px);
   }
   
-  .wrapper {
-    padding: 2rem 0;
-    gap: 1.5rem;
-  }
+
 }
