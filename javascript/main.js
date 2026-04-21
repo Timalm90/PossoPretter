@@ -11,6 +11,7 @@ const searchInput = document.getElementById("search");
 const suggestionsDropdown = document.getElementById("suggestions");
 const posterSelect = document.getElementById("posterSelect");
 const loadingText = document.getElementById("loadingText");
+const movieTitle = document.getElementById("movieTitle");
 
 let suggestionTimeout;
 let currentMovieId = null;
@@ -151,6 +152,7 @@ async function loadMovieFromSuggestion(movie) {
     showLoading("Loading movie...");
     currentMovieId = movie.id;
     setPoster(movie.poster_path);
+    movieTitle.textContent = movie.title;
     searchInput.value = "";
     await loadPosterOptions(movie.id);
     hideLoading();
@@ -214,6 +216,7 @@ async function loadMovie(){
     console.log("Loaded:", movie.title);
     currentMovieId = movie.id;
     setPoster(movie.poster_path);
+    movieTitle.textContent = movie.title;
     searchInput.value = "";
     await loadPosterOptions(movie.id);
     hideLoading();
