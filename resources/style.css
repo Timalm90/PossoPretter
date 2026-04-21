@@ -348,10 +348,22 @@ button {
   color: #333;
 }
 
-button:hover {
-  letter-spacing: 3px;
-  background-color: var(--accent-color);
-  color: var(--primary-color-active);
+/* Only apply hover effects on non-touch devices */
+@media (hover: hover) {
+  button:hover {
+    letter-spacing: 3px;
+    background-color: var(--accent-color);
+    color: var(--primary-color-active);
+  }
+
+  #swapButton:hover, #saveButton:hover {
+    background-color: var(--primary-color);
+    color: var(--accent-color-active);
+  }
+
+  #swapButton:hover {
+    color: white;
+  }
 }
 
 button:active {
@@ -360,18 +372,6 @@ button:active {
   color: hsl(296, 72%, 18%);
   transform: scale(1.05);
   transition: 100ms;
-}
-
-
-
-
-#swapButton:hover, #saveButton:hover {
-  background-color: var(--primary-color);
-  color: var(--accent-color-active);
-}
-
-#swapButton:hover {
-  color: white;
 }
 
 #swapButton:active, #saveButton:active {
@@ -457,8 +457,53 @@ input[type="range"] {
 }
 
 #slider {
+  -webkit-appearance: none;
+  appearance: none;
   width: clamp(250px, 85vw, 450px);
+  height: 15px;
+  border-radius: 20px;
+  background: linear-gradient(to right, #62366F 0%, #62366F 0%, #d3d3d3 0%, #d3d3d3 100%);
+  outline: none;
+  -webkit-transition: background .2s;
+  transition: background .2s;
   max-width: 95vw;
+  margin: clamp(1rem, 2vh, 1.5rem) 0;
+  cursor: grab;
+}
+
+/* Track height */
+#slider::-webkit-slider-runnable-track {
+  height: 12px;
+  box-sizing: border-box;
+}
+
+#slider::-moz-range-track {
+  height: 12px;
+  box-sizing: border-box;
+}
+
+/* Thumb/handle size only */
+#slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #62366F;
+  border: 10px solid #62366F;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  margin-top: -6px;
+}
+
+#slider::-moz-range-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: grab;
+  background: #62366F;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Mobile - Extra small (< 480px) */
