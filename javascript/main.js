@@ -1,4 +1,4 @@
-const API_KEY = "222b074ef12e930e8324992aa11d38da";
+const API_KEY = CONFIG.TMDB_API_KEY;
 const BASE = "https://api.themoviedb.org/3";
 const IMG = "https://image.tmdb.org/t/p/original";
 

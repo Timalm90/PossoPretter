@@ -41,7 +41,7 @@ body {
   box-sizing: border-box;
   overflow-y: auto;
   margin: 0;
-  gap: clamp(0.5rem, 2vh, 1.5rem);
+  gap: clamp(0.25rem, 0.5vh, 0.5rem);
 }
 
 .titleBold {
@@ -189,20 +189,24 @@ backward {
 }
 
 .selectBox {
-  padding: 10px 15px;
-  padding-right: 35px;
+  padding: clamp(6px, 1.5vh, 8px) clamp(12px, 2vw, 20px);
+  padding-right: clamp(30px, 3vw, 40px);
   border-radius: 20px;
   border: 0;
   background-color: white;
   text-transform: uppercase;
   text-align: center;
-  font-size: clamp(10px, 2vw, 12px);
+  font-size: clamp(10px, 1.5vw, 12px);
   max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   transition: all 0.5s ease;
   position: relative;
+  height: clamp(28px, 3vh, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   appearance: none;
   -webkit-appearance: none;
@@ -210,11 +214,11 @@ backward {
 
   background-image: url('data:image/svg+xml;utf8,<svg fill="black" height="16" width="16" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><polygon points="5,7 15,7 10,12"/></svg>');
   background-repeat: no-repeat;
-  background-position: right 10px center;
-  background-size: 14px;
-  border: 2px solid #333;
+  background-position: right clamp(8px, 1vw, 12px) center;
+  background-size: clamp(12px, 1.5vw, 16px);
   box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.385);
   border-style: none;
+  outline: none;
   
 }
 
@@ -286,6 +290,10 @@ button {
   transition: all 0.5s ease;
   padding: clamp(6px, 1.5vh, 10px) clamp(12px, 2vw, 20px);
   font-size: clamp(10px, 1.5vw, 12px);
+  height: clamp(28px, 3vh, 36px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.385);
   background-color: white;
   color: #333;
@@ -331,8 +339,8 @@ button:active {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(1rem, 2vh, 1.5rem);
-  padding: clamp(1rem, 2vh, 2rem) 0;
+  gap: clamp(0.5rem, 1.5vh, 1.2rem);
+  padding: clamp(0.25rem, 0.5vh, 0.5rem) 0 clamp(1rem, 2vh, 2rem) 0;
   width: 100%;
   max-width: 95vw;
   flex: 1;
