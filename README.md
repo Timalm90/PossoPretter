@@ -1,7 +1,10 @@
 <h1 align="center">
 PossopTerret
 </h1>
+
 <p align="center">
+  https://webbegrim.se/possopterret/
+
 <p align="center">
 
   <img src="https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=white">
@@ -10,7 +13,6 @@ PossopTerret
 
 <p align="center">
 
-https://webbegrim.se/posterposter/
 
 Load a movie poster and explore its mirrored perspective in real-time. Adjust the mirror point with an interactive slider, reverse the view, and discover movies through multiple discovery modes.
 
