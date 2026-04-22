@@ -145,7 +145,7 @@ backward {
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  width: 50vw;
+  width: clamp(70vw, 90vw, 600px);
   background-color: rgb(170 114 185);
   border-radius: 10px;
   list-style: none;
@@ -163,15 +163,16 @@ backward {
 }
 
 .suggestion-item {
-  padding: 10px 15px;
+  padding: 8px 12px;
   color: white;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   transition: all 0.2s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: clamp(12px, 2vw, 14px);
 }
 
 .suggestion-item:last-child {
@@ -216,6 +217,7 @@ backward {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: clamp(140px, 25vw, 180px);
 
   appearance: none;
   -webkit-appearance: none;
@@ -228,7 +230,8 @@ backward {
   box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.385);
   border-style: none;
   outline: none;
-  
+    text-align: center;
+
 }
 
 .poster-selector {
@@ -240,8 +243,7 @@ backward {
 }
 
 .posterDropdown {
-  padding: clamp(6px, 1.5vh, 10px) clamp(10px, 1.5vw, 15px);
-  padding-right: clamp(25px, 3vw, 35px);
+  width: clamp(140px, 25vw, 180px);
   border-radius: 50px;
   border: 0;
   background-color: white !important;
@@ -259,12 +261,19 @@ backward {
   background-position: right clamp(8px, 1vw, 12px) center;
   background-size: clamp(12px, 1.5vw, 16px);
   box-shadow: -3px 4px 4px 0px rgba(0, 0, 0, 0.385);
+  height: clamp(28px, 3vh, 36px);
+  display: flex;
+  align-items: center;
+  text-align: center;
+
 }
 
 .posterDropdown:hover {
   letter-spacing: 3px;
   background-color: var(--accent-color);
   color: var(--primary-color-active);
+    text-align: center;
+
 }
 
 .posterDropdown:active {
@@ -273,16 +282,24 @@ backward {
   color: hsl(296, 72%, 18%);
   transform: scale(1.05);
   transition: 100ms;
+    text-align: center;
+
 }
 
 .controls {
   display: flex;
-  flex-direction: column;
-  gap: clamp(0.75rem, 1.5vh, 1.5rem);
+  gap: 20px;
   align-items: center;
   justify-content: center;
   width: 100%;
   margin-bottom: clamp(0.5rem, 1.5vh, 1rem);
+}
+
+.controls-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0;
 }
 
 .controls-top {
@@ -314,6 +331,11 @@ backward {
 .reverse-button svg {
   width: clamp(24px, 4vw, 32px);
   height: clamp(24px, 4vw, 32px);
+  transition: transform 0.3s ease;
+}
+
+.reverse-button.rotated svg {
+  transform: rotate(180deg);
 }
 
 .reverse-label {
@@ -327,6 +349,10 @@ backward {
 .poster-selector {
   display: flex;
   justify-content: center;
+}
+
+#saveButton {
+  width: clamp(140px, 25vw, 180px);
 }
 
 
@@ -460,17 +486,15 @@ input[type="range"] {
   -webkit-appearance: none;
   appearance: none;
   width: clamp(250px, 85vw, 450px);
-  height: 15px;
+  height: 7px;
   border-radius: 20px;
-  background: linear-gradient(to right, #62366F 0%, #62366F 0%, #d3d3d3 0%, #d3d3d3 100%);
+  background: linear-gradient(to right, #62366F 0%, #62366F 50%, #e8e83d 50%, #e8e83d 100%);
   outline: none;
-  -webkit-transition: background .2s;
   transition: background .2s;
   max-width: 95vw;
   margin: clamp(1rem, 2vh, 1.5rem) 0;
   cursor: grab;
 }
-
 /* Track height */
 #slider::-webkit-slider-runnable-track {
   height: 12px;
@@ -506,8 +530,27 @@ input[type="range"] {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile - Extra small (< 480px) */
+/* Mobile - Small (480px) - Shrink buttons */
 @media (max-width: 480px) {
+  .posterDropdown {
+    width: clamp(110px, 20vw, 140px);
+    height: clamp(32px, 3.5vh, 40px);
+    font-size: clamp(8px, 1.2vw, 10px);
+      text-align: center;
+
+  }
+
+  #saveButton {
+    width: clamp(110px, 20vw, 140px);
+    height: clamp(32px, 3.5vh, 40px);
+    font-size: clamp(8px, 1.2vw, 10px);
+  }
+
+  button {
+    height: clamp(32px, 3.5vh, 40px);
+    font-size: clamp(8px, 1.2vw, 10px);
+  }
+
   .titleBold {
     padding: 0.5rem 0;
   }
@@ -518,6 +561,19 @@ input[type="range"] {
   
   .pair {
     width: clamp(200px, 90vw, 350px);
+  }
+}
+
+/* Mobile - Extra small (< 300px) - Stack vertically */
+@media (max-width: 300px) {
+  .controls {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .controls-side {
+    flex: 1;
+    width: 100%;
   }
 }
 

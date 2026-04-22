@@ -189,8 +189,11 @@ async function loadMovieFromSuggestion(movie) {
     setPoster(movie.poster_path);
     movieTitle.textContent = movie.title;
     searchInput.value = "";
+    searchInput.blur();
     await loadPosterOptions(movie.id);
     hideLoading();
+    // Reset zoom on mobile after search
+    document.body.style.zoom = "100%";
   } else {
     alert("This movie doesn't have a poster available!");
   }
@@ -203,7 +206,7 @@ async function loadPosterOptions(movieId) {
     const data = await res.json();
 
     // Clear previous posters
-    posterSelect.innerHTML = '<option value="">Select a poster...</option>';
+    posterSelect.innerHTML = '<option value="">Alt Poster</option>';
 
     if (!data.posters || data.posters.length === 0) {
       posterSelect.style.display = "none";
