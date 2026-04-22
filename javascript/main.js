@@ -409,10 +409,23 @@ async function saveImage() {
       const link = document.createElement("a");
       link.href = URL.createObjectURL(blob);
       link.download = `PossoPretter-${currentMovieId || "image"}.png`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      URL.revokeObjectURL(link.href);
+      
+      // Mobile-friendly approach: use try/catch for different methods
+      try {
+        // Try standard method first
+        link.style.display = "none";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      } catch (e) {
+        // Fallback for iOS: open in new window
+        window.open(link.href, "_blank");
+      }
+      
+      setTimeout(() => {
+        URL.revokeObjectURL(link.href);
+      }, 100);
+      
       showLoading("Image saved!");
       setTimeout(hideLoading, 2000);
     }, "image/png");
